@@ -1,0 +1,50 @@
+#input file Authored by Chen Liao, USTC
+#
+
+#	parameter
+#	Format:	[name][expression]
+
+<parameters>
+NA				6.02e23	#	Avogadro
+f				1			
+Ve				f*0.4	#	L
+V				f*7e-16	#	L
+N				1	
+pulse_conc		0.001	#	M
+pulse1_start	2500.01	#	s
+pulse2_start	2561.01	#	s
+arab_init		0.0		#	M
+dna1_init		1/NA/V	#	M
+dna2_init		1/NA/V	#	M
+</parameters>
+
+#	compartment
+#	Format:	[name][outside][ruletable][volume][population]
+#	volumn and population are optional (default 1 to both)
+#	The outside compartment must be defined previously.
+
+<compartments>
+Medium		ROOT		medium			Ve
+Ecoli		Medium		rtc2_counter	V	N
+</compartments>
+
+#	seedspecies
+#	Format:	[compartment][name][structure][init_concentration][const]
+#	const is optional with default value false
+#	Booleans: true/false, case insensitive.
+#
+<seedspecies>
+Medium	arab	nb:i0003(arac)	arab_init
+Ecoli	dna1	d:j23100()-j01010(rib~off)-i2032(dna)-b0014()-r0085(rnap)-j01010(rib~off)-e0040()-b0014()	dna1_init
+Ecoli	dna2	p:c0080(dna!2,arab,dim!1).p:c0080(dna!3,arab,dim!1).d:i0500(arac1!2,arac2!3)-j01008()-b0014() dna2_init
+</seedspecies>
+
+#	event
+#	Format:	[name][trigger_condition][event_assignments...]
+#
+#	predefined time variable: time
+
+<events>
+pulse1	time>pulse1_start	arab=pulse_conc
+pulse2	time>pulse2_start	arab=pulse_conc
+</events>

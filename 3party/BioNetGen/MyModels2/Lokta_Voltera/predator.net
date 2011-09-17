@@ -1,0 +1,46 @@
+# Created by BioNetGen 2.1.8+
+substanceUnits("Number");
+begin parameters
+    1 xnot   40  # Constant
+    2 ynot   40  # Constant
+    3 alpha  .4  # Constant
+    4 beta   .01  # Constant
+    5 gamma  .3  # Constant
+    6 cfac   .2  # Constant
+    7 delta  0.002  # ConstantExpression
+end parameters
+begin molecule types
+    1 Trash()
+    2 X()
+    3 Y()
+end molecule types
+begin observables
+    1 Molecules Prey X()
+    2 Molecules Pred Y()
+end observables
+begin species
+    1 X()      xnot
+    2 Y()      ynot
+    3 Trash()  0
+end species
+begin reaction rules
+        1 X() -> X() + X()  alpha
+    # Add Species X()
+        2 Y() + X() -> Y() + Y() + X()  delta
+    # Add Species Y()
+        3 X() + Y() -> Y()  beta
+    # Delete Pattern X()
+        4 Y() -> Trash()  gamma
+    # Add Species Trash()
+    # Delete Pattern Y()
+end reaction rules
+begin reactions
+    1 1 1,1 alpha #1
+    2 1,2 1,2,2 delta #2
+    3 1,2 2 beta #3
+    4 2 3 gamma #4
+end reactions
+begin groups
+    1 Prey                 1
+    2 Pred                 2
+end groups

@@ -1,0 +1,50 @@
+begin model 
+begin parameters
+   # Physical and geometric constants
+   NA     6.0e23 #Avogadro’s num
+   f	    0.01 #scaling factor
+   Vo      f*1e-10 # L
+   V       f*3e-12 # L
+ 
+  # Initial concentrations
+   EGF_conc 2e-9 # nM
+   EGF0   EGF_conc*NA*Vo #nM
+   EGFR0  f*1.8e5    #copy per cell
+
+   # Rate constants 
+   kp1    9.0e7/(NA*Vo) #input /M/sec         
+   km1   0.06         #/sec    
+end parameters
+
+begin molecule types
+   EGF(R)
+   EGFR(L,CR1,Y1068~U~P)
+end molecule types
+
+begin seed species
+   EGF(R)              EGF0
+   EGFR(L,CR1,Y1068~U) EGFR0
+end seed species
+
+begin reaction rules
+   EGF(R) + EGFR(L) <-> EGF(R!1).EGFR(L!1) kp1, km1
+end reaction rules
+
+begin observables
+ # Species LR EGF(R!1).EGFR(L!1)
+  Molecules Lbound EGF(R!+)
+end observables
+end model
+
+generate_network({overwrite=>1});
+writeSBML ({});
+simulate_ode({t_start=>0,t_end=>100,n_steps=>20});
+
+#begin actions
+#  generate_network({overwrite=>1});
+#  saveConcentrations();
+#  simulate_ode({suffix=>ode,n_steps=>20,t_end=>100});
+#	writeSBML({});
+#  resetConcentrations();
+#  simulate_nf({suffix=>ssa,n_steps=>20,t_end=>100});
+#end actions

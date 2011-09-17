@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by BioNetGen 2.1.8+  -->
+<sbml xmlns="http://www.sbml.org/sbml/level2" level="2" version="1">
+  <model id="simple">
+    <listOfCompartments>
+      <compartment id="cell" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="S1" compartment="cell" initialConcentration="" name="EGF(R)"/>
+      <species id="S2" compartment="cell" initialConcentration="" name="EGFR(CR1,L,Y1068~U)"/>
+      <species id="S3" compartment="cell" initialConcentration="0" name="EGF(R!1).EGFR(CR1,L!1,Y1068~U)"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <!-- Independent variables -->
+      <parameter id="NA" value="6.0e23"/>
+      <parameter id="f" value="0.01"/>
+      <parameter id="EGF_conc" value="2e-9"/>
+      <parameter id="km1" value="0.06"/>
+      <!-- Dependent variables -->
+      <parameter id="Vo" constant="false"/>
+      <parameter id="V" constant="false"/>
+      <parameter id="EGF0" constant="false"/>
+      <parameter id="EGFR0" constant="false"/>
+      <parameter id="kp1" constant="false"/>
+      <!-- Observables -->
+      <parameter id="Group_Lbound" constant="false"/>
+    </listOfParameters>
+    <listOfRules>
+      <!-- Dependent variables -->
+      <assignmentRule variable="Vo">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f </ci>
+            <cn> 1e-10 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="V">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f </ci>
+            <cn> 3e-12 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="EGF0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <times/>
+              <ci> EGF_conc </ci>
+              <ci> NA </ci>
+            </apply>
+            <ci> Vo </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="EGFR0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> f </ci>
+            <cn> 1.8e5 </cn>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="kp1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <cn> 9.0e7 </cn>
+            <apply>
+              <times/>
+              <ci> NA </ci>
+              <ci> Vo </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <!-- Observables -->
+      <assignmentRule variable="Group_Lbound">
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+                <cn> 0 </cn>
+              <ci> S3 </ci>
+            </apply>
+          </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="R1" reversible="false">
+        <listOfReactants>
+          <speciesReference species="S1"/>
+          <speciesReference species="S2"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S3"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> kp1 </ci>
+              <ci> S1 </ci>
+              <ci> S2 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="R2" reversible="false">
+        <listOfReactants>
+          <speciesReference species="S3"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S1"/>
+          <speciesReference species="S2"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> km1 </ci>
+              <ci> S3 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

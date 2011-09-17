@@ -1,0 +1,154 @@
+# Created by MoDeL 1.1
+<parameters>
+    1  NA          6.020e+23  
+    2  f           1.000e+00  
+    3  Vo          1.000e-10   #	f*1e-10
+    4  V           3.000e-12   #	f*3e-12
+    5  EGF_init    1.204e+06   #	20e-9*NA*Vo
+    6  EGFR_init   1.800e+05   #	f*1.8e5
+    7  Grb2_init   1.500e+05   #	f*1.5e5
+    8  Sos1_init   6.200e+04   #	f*6.2e4
+    9  rule1_k     1.495e-06  
+   10  rule9_k     5.537e-06  
+   11  rule2_k     6.000e-02  
+   12  rule3_k     5.537e-06  
+   13  rule10_k    6.000e-02  
+   14  rule4_k     1.000e-01  
+   15  rule5_k     5.000e-01  
+   16  rule11_k    1.000e-02  
+   17  rule6_k     4.505e+00  
+   18  rule7_k     8.306e-07  
+   19  rule8_k     5.000e-02  
+</parameters>
+<compartments>
+    1  comp0   (R)    1.000  1   #  egfr_simple 
+</compartments>
+<species>
+  #  comp0
+    1  EGF    1.204e+06    p:EGF(R)    #  Seed  
+    2  EGFR   1.800e+05    p:EGFR(CR1,L,Y1068~U)    #  Seed  
+    3  Grb2   1.500e+05    p:Grb2(SH2,SH3)    #  Seed  
+    4  Sos1   6.200e+04    p:Sos1(PxxP)    #  Seed  
+    5  s5     0.000e+00    p:EGF(R!1).p:EGFR(CR1,L!1,Y1068~U)  
+    6  s6     0.000e+00    p:Grb2(SH2,SH3!1).p:Sos1(PxxP!1)  
+    7  s7     0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068~U).p:EGFR(CR1!3,L!2,Y1068~U)  
+    8  s8     0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068~P).p:EGFR(CR1!3,L!2,Y1068~U)  
+    9  s9     0.000e+00    p:EGF(R!1).p:EGFR(CR1,L!1,Y1068~P)  
+   10  s10    0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068~P).p:EGFR(CR1!3,L!2,Y1068~P)  
+   11  s11    0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068!4~P).p:EGFR(CR1!3,L!2,Y1068~U).p:Grb2(SH2!4,SH3)  
+   12  s12    0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068!4~P).p:EGFR(CR1!3,L!2,Y1068~U).p:Grb2(SH2!4,SH3!5).p:Sos1(PxxP!5)  
+   13  s13    0.000e+00    p:EGFR(CR1,L,Y1068~P)  
+   14  s14    0.000e+00    p:EGF(R!1).p:EGFR(CR1,L!1,Y1068!2~P).p:Grb2(SH2!2,SH3)  
+   15  s15    0.000e+00    p:EGF(R!1).p:EGFR(CR1,L!1,Y1068!2~P).p:Grb2(SH2!2,SH3!3).p:Sos1(PxxP!3)  
+   16  s16    0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068!4~P).p:EGFR(CR1!3,L!2,Y1068~P).p:Grb2(SH2!4,SH3)  
+   17  s17    0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068!4~P).p:EGFR(CR1!3,L!2,Y1068~P).p:Grb2(SH2!4,SH3!5).p:Sos1(PxxP!5)  
+   18  s18    0.000e+00    p:EGFR(CR1,L,Y1068!1~P).p:Grb2(SH2!1,SH3)  
+   19  s19    0.000e+00    p:EGFR(CR1,L,Y1068!1~P).p:Grb2(SH2!1,SH3!2).p:Sos1(PxxP!2)  
+   20  s20    0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068!4~P).p:EGFR(CR1!3,L!2,Y1068!5~P).p:Grb2(SH2!4,SH3).p:Grb2(SH2!5,SH3)  
+   21  s21    0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068!4~P).p:EGFR(CR1!3,L!2,Y1068!5~P).p:Grb2(SH2!4,SH3!6).p:Grb2(SH2!5,SH3).p:Sos1(PxxP!6)  
+   22  s22    0.000e+00    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1,Y1068!4~P).p:EGFR(CR1!3,L!2,Y1068!5~P).p:Grb2(SH2!4,SH3!6).p:Grb2(SH2!5,SH3!7).p:Sos1(PxxP!6).p:Sos1(PxxP!7)  
+</species>
+<events>
+</events>
+<rules>
+  #  egfr_simple
+    1    p:EGFR(CR1,L)  +  p:EGF(R)    ->    p:EGF(R!1).p:EGFR(CR1,L!1)      rule1_k*#1*#2    #  binding_EGFR_EGF        
+    2    p:EGF(R!1).p:EGFR(CR1,L!1)    ->    p:EGFR(CR1,L)  +  p:EGF(R)      rule2_k*#1    #  binding_EGFR_EGF_rev    
+    3    p:EGFR(CR1,L!+)  +  p:EGFR(CR1,L!+)    ->    p:EGFR(CR1!1,L!+).p:EGFR(CR1!1,L!+)      rule3_k*#1*#2    #  dimerization_EGFR       
+    4    p:EGFR(CR1!1,L!+).p:EGFR(CR1!1,L!+)    ->    p:EGFR(CR1,L!+)  +  p:EGFR(CR1,L!+)      rule4_k*#1    #  dimerization_EGFR_rev   
+    5    p:EGFR(CR1!+,Y1068~U)    ->    p:EGFR(CR1!+,Y1068~P)      rule5_k*#1    #  phosphorylation_EGFR    
+    6    p:EGFR(Y1068~P)    ->    p:EGFR(Y1068~U)      rule6_k*#1    #  dephosphorylation_EGFR  
+    7    p:EGFR(Y1068~P)  +  p:Grb2(SH2)    ->    p:EGFR(Y1068!1~P).p:Grb2(SH2!1)      rule7_k*#1*#2    #  binding_EGFR_Grb2       
+    8    p:EGFR(Y1068!1~P).p:Grb2(SH2!1)    ->    p:EGFR(Y1068~P)  +  p:Grb2(SH2)      rule8_k*#1    #  binding_EGFR_Grb2_rev   
+    9    p:Grb2(SH3)  +  p:Sos1(PxxP)    ->    p:Grb2(SH3!1).p:Sos1(PxxP!1)      rule9_k*#1*#2    #  binding_Grb2_Sos1       
+   10    p:Grb2(SH3!1).p:Sos1(PxxP!1)    ->    p:Grb2(SH3)  +  p:Sos1(PxxP)      rule10_k*#1    #  binding_Grb2_Sos1_rev   
+   11    p:EGF(R!1).p:EGF(R!2).p:EGFR(CR1!3,L!1).p:EGFR(CR1!3,L!2)    ->      rule11_k*#1    #  dimerization_EGFR2_EGF2 
+</rules>
+<reactions>
+    1  r1      EGFR  +  EGF    ->    s5          rule1_k*EGFR*EGF  
+    2  r2      Grb2  +  Sos1    ->    s6          rule9_k*Grb2*Sos1    #9
+    3  r3          s5    ->    EGF  +  EGFR      rule2_k*s5    #2
+    4  r4      s5  +  s5    ->    s7          0.500 * ( rule3_k*s5*s5 )    #3
+    5  r5          s6    ->    Grb2  +  Sos1      rule10_k*s6    #10
+    6  r6          s7    ->    s5  +  s5      rule4_k*s7    #4
+    7  r7          s7    ->    s8          2.000 * ( rule5_k*s7 )    #5
+    8  r8          s7    ->                rule11_k*s7    #11
+    9  r9          s8    ->    s5  +  s9      rule4_k*s8    #4
+   10  r10         s8    ->    s10         rule5_k*s8    #5
+   11  r11         s8    ->    s7          rule6_k*s8    #6
+   12  r12     s8  +  Grb2    ->    s11         rule7_k*s8*Grb2    #7
+   13  r13     s8  +  s6    ->    s12         rule7_k*s8*s6    #7
+   14  r14         s8    ->                rule11_k*s8    #11
+   15  r15         s9    ->    EGF  +  s13      rule2_k*s9    #2
+   16  r16     s5  +  s9    ->    s8          rule3_k*s5*s9    #3
+   17  r17     s9  +  s9    ->    s10         0.500 * ( rule3_k*s9*s9 )    #3
+   18  r18         s9    ->    s5          rule6_k*s9    #6
+   19  r19     s9  +  Grb2    ->    s14         rule7_k*s9*Grb2    #7
+   20  r20     s9  +  s6    ->    s15         rule7_k*s9*s6    #7
+   21  r21        s10    ->    s9  +  s9      rule4_k*s10    #4
+   22  r22        s10    ->    s8          2.000 * ( rule6_k*s10 )    #6
+   23  r23     s10  +  Grb2    ->    s16         2.000 * ( rule7_k*s10*Grb2 )    #7
+   24  r24     s10  +  s6    ->    s17         2.000 * ( rule7_k*s10*s6 )    #7
+   25  r25        s10    ->                rule11_k*s10    #11
+   26  r26        s11    ->    s14  +  s5      rule4_k*s11    #4
+   27  r27        s11    ->    s16         rule5_k*s11    #5
+   28  r28        s11    ->    Grb2  +  s8      rule8_k*s11    #8
+   29  r29     s11  +  Sos1    ->    s12         rule9_k*s11*Sos1    #9
+   30  r30        s11    ->    Grb2        rule11_k*s11    #11
+   31  r31        s12    ->    s15  +  s5      rule4_k*s12    #4
+   32  r32        s12    ->    s17         rule5_k*s12    #5
+   33  r33        s12    ->    s6  +  s8      rule8_k*s12    #8
+   34  r34        s12    ->    Sos1  +  s11      rule10_k*s12    #10
+   35  r35        s12    ->    s6          rule11_k*s12    #11
+   36  r36     s13  +  EGF    ->    s9          rule1_k*s13*EGF  
+   37  r37        s13    ->    EGFR        rule6_k*s13    #6
+   38  r38     s13  +  Grb2    ->    s18         rule7_k*s13*Grb2    #7
+   39  r39     s13  +  s6    ->    s19         rule7_k*s13*s6    #7
+   40  r40        s14    ->    EGF  +  s18      rule2_k*s14    #2
+   41  r41     s5  +  s14    ->    s11         rule3_k*s5*s14    #3
+   42  r42     s9  +  s14    ->    s16         rule3_k*s9*s14    #3
+   43  r43     s14  +  s14    ->    s20         0.500 * ( rule3_k*s14*s14 )    #3
+   44  r44        s14    ->    Grb2  +  s9      rule8_k*s14    #8
+   45  r45     s14  +  Sos1    ->    s15         rule9_k*s14*Sos1    #9
+   46  r46        s15    ->    EGF  +  s19      rule2_k*s15    #2
+   47  r47     s5  +  s15    ->    s12         rule3_k*s5*s15    #3
+   48  r48     s9  +  s15    ->    s17         rule3_k*s9*s15    #3
+   49  r49     s14  +  s15    ->    s21         rule3_k*s14*s15    #3
+   50  r50     s15  +  s15    ->    s22         0.500 * ( rule3_k*s15*s15 )    #3
+   51  r51        s15    ->    s6  +  s9      rule8_k*s15    #8
+   52  r52        s15    ->    Sos1  +  s14      rule10_k*s15    #10
+   53  r53        s16    ->    s14  +  s9      rule4_k*s16    #4
+   54  r54        s16    ->    s11         rule6_k*s16    #6
+   55  r55     s16  +  Grb2    ->    s20         rule7_k*s16*Grb2    #7
+   56  r56     s16  +  s6    ->    s21         rule7_k*s16*s6    #7
+   57  r57        s16    ->    Grb2  +  s10      rule8_k*s16    #8
+   58  r58     s16  +  Sos1    ->    s17         rule9_k*s16*Sos1    #9
+   59  r59        s16    ->    Grb2        rule11_k*s16    #11
+   60  r60        s17    ->    s15  +  s9      rule4_k*s17    #4
+   61  r61        s17    ->    s12         rule6_k*s17    #6
+   62  r62     s17  +  Grb2    ->    s21         rule7_k*s17*Grb2    #7
+   63  r63     s17  +  s6    ->    s22         rule7_k*s17*s6    #7
+   64  r64        s17    ->    s10  +  s6      rule8_k*s17    #8
+   65  r65        s17    ->    Sos1  +  s16      rule10_k*s17    #10
+   66  r66        s17    ->    s6          rule11_k*s17    #11
+   67  r67     s18  +  EGF    ->    s14         rule1_k*s18*EGF  
+   68  r68        s18    ->    Grb2  +  s13      rule8_k*s18    #8
+   69  r69     s18  +  Sos1    ->    s19         rule9_k*s18*Sos1    #9
+   70  r70     s19  +  EGF    ->    s15         rule1_k*s19*EGF  
+   71  r71        s19    ->    s13  +  s6      rule8_k*s19    #8
+   72  r72        s19    ->    Sos1  +  s18      rule10_k*s19    #10
+   73  r73        s20    ->    s14  +  s14      rule4_k*s20    #4
+   74  r74        s20    ->    Grb2  +  s16      2.000 * ( rule8_k*s20 )    #8
+   75  r75     s20  +  Sos1    ->    s21         2.000 * ( rule9_k*s20*Sos1 )    #9
+   76  r76        s20    ->    Grb2  +  Grb2      rule11_k*s20    #11
+   77  r77        s21    ->    s14  +  s15      rule4_k*s21    #4
+   78  r78        s21    ->    s16  +  s6      rule8_k*s21    #8
+   79  r79        s21    ->    Grb2  +  s17      rule8_k*s21    #8
+   80  r80     s21  +  Sos1    ->    s22         rule9_k*s21*Sos1    #9
+   81  r81        s21    ->    Sos1  +  s20      rule10_k*s21    #10
+   82  r82        s21    ->    Grb2  +  s6      rule11_k*s21    #11
+   83  r83        s22    ->    s15  +  s15      rule4_k*s22    #4
+   84  r84        s22    ->    s17  +  s6      2.000 * ( rule8_k*s22 )    #8
+   85  r85        s22    ->    Sos1  +  s21      2.000 * ( rule10_k*s22 )    #10
+   86  r86        s22    ->    s6  +  s6      rule11_k*s22    #11
+</reactions>

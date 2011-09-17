@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model id="predator_prey">
+    <listOfCompartments>
+      <compartment id="comp0" size="1" constant="false"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="X" name="nb:X()" compartment="comp0" initialConcentration="40"/>
+      <species id="Y" name="nb:Y()" compartment="comp0" initialConcentration="40"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="xnot" value="40"/>
+      <parameter id="ynot" value="40"/>
+      <parameter id="rule1_k" value="0.4"/>
+      <parameter id="rule2_k" value="0.002"/>
+      <parameter id="rule3_k" value="0.01"/>
+      <parameter id="rule4_k" value="0.3"/>
+      <parameter id="time" value="0" constant="false"/>
+    </listOfParameters>
+    <listOfRules>
+      <assignmentRule variable="time">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> t </csymbol>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="r1" reversible="false">
+        <listOfReactants>
+          <speciesReference species="X"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="X"/>
+          <speciesReference species="X"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> rule1_k </ci>
+              <ci> X </ci>
+              <ci> comp0 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="r2" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Y"/>
+          <speciesReference species="X"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="X"/>
+          <speciesReference species="Y"/>
+          <speciesReference species="Y"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> rule2_k </ci>
+              <ci> Y </ci>
+              <ci> X </ci>
+              <ci> comp0 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="r3" reversible="false">
+        <listOfReactants>
+          <speciesReference species="X"/>
+          <speciesReference species="Y"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="Y"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> rule3_k </ci>
+              <ci> X </ci>
+              <ci> Y </ci>
+              <ci> comp0 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="r4" reversible="false">
+        <listOfReactants>
+          <speciesReference species="Y"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> rule4_k </ci>
+              <ci> Y </ci>
+              <ci> comp0 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

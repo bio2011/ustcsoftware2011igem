@@ -1,0 +1,16 @@
+#Simple Predator-prey model from BNGL
+#Rewritten by Chen Liao, USTC
+
+<parameters>
+xnot	40	#	adsafdadfa
+ynot	40
+</parameters>
+
+<compartments>
+comp0	ROOT	predator_prey	
+</compartments>
+
+<seedspecies>
+comp0	X	nb:X()	xnot
+comp0	Y	nb:Y()	ynot
+</seedspecies>

@@ -1,0 +1,132 @@
+# Created by MoDeL 1.1
+<parameters>
+    1  NA             6.020e+23  
+    2  f              1.000e+00  
+    3  Ve             4.000e-01   #	f*0.4
+    4  V              7.000e-16   #	f*7e-16
+    5  N              1.000e+00  
+    6  pulse_conc     1.000e-03  
+    7  pulse1_start   2.500e+03  
+    8  pulse2_start   2.561e+03  
+    9  arab_init      0.000e+00  
+   10  dna1_init      2.373e-09   #	1/NA/V
+   11  dna2_init      2.373e-09   #	1/NA/V
+   12  transp2_pout   2.000e-01  
+   13  transp2_pin    2.000e-01  
+   14  rule11_k       1.500e+00  
+   15  rule6_k        1.000e-02  
+   16  rule19_k       3.500e-01  
+   17  rule15_k       7.060e-02  
+   18  rule1_k        1.000e+08  
+   19  rule4_k        1.000e-01  
+   20  rule5_k        7.100e+10  
+   21  rule10_k       1.000e-01  
+   22  rule2_k        1.000e+01  
+   23  rule3_k        1.000e+09  
+   24  rule13_n       1.000e+00  
+   25  rule13_Kp      9.000e-04  
+   26  rule13_kcat    7.600e+00  
+   27  rule16_k       1.670e-01  
+   28  rule12_k       1.000e-01  
+   29  rule7_k        2.000e+06  
+   30  rule17_k       5.600e-03  
+   31  rule8_k        6.000e-02  
+   32  rule9_k        5.000e-01  
+   33  rule14_k       7.000e-02  
+   34  rule18_k       1.500e-03  
+</parameters>
+<compartments>
+    1  Medium   (R)     0.400  1   #  medium       
+    2  Ecoli    Medium  0.000  1   #  rtc2_counter 
+</compartments>
+<species>
+  #  Medium
+    1  arab   0.000e+00    nb:i0003(arac)    #  Seed  
+  #  Ecoli
+    2  dna1   2.373e-09    d:b0014*()-e0040*()-j01010*(rib~off)-r0085*(rnap)-b0014*()-i2032*(dna)-j01010*(rib~off)-j23100*()    #  Seed  
+    3  dna2   2.373e-09    d:b0014*()-j01008*()-i0500*(arac1!1,arac2!2).p:c0080(arab,dim!3,dna!1).p:c0080(arab,dim!3,dna!2)    #  Seed  
+    4  s4     0.000e+00    nb:i0003(arac)  
+    5  s5     0.000e+00    r:j01010(rib~off)-i2032(dna)  
+    6  s6     0.000e+00    p:c0080(arab,dim!1,dna).p:c0080(arab,dim!1,dna)  
+    7  s7     0.000e+00    d:b0014*()-j01008*()-i0500*(arac1,arac2)  
+    8  s8     0.000e+00    nb:i0003(arac!1).p:c0080(arab!1,dim!2,dna).p:c0080(arab,dim!2,dna)  
+    9  s9     0.000e+00    p:c0080(arab,dim,dna)  
+   10  s10    0.000e+00    r:j01008()  
+   11  s11    0.000e+00    nb:i0003(arac!1).nb:i0003(arac!2).p:c0080(arab!1,dim!3,dna).p:c0080(arab!2,dim!3,dna)  
+   12  s12    0.000e+00    nb:i0003(arac!1).p:c0080(arab!1,dim,dna)  
+   13  s13    0.000e+00    r:j01010(rib~on)-i2032(dna)  
+   14  s14    0.000e+00    p:i2032(dna)  
+   15  s15    0.000e+00    d:b0014*()-e0040*()-j01010*(rib~off)-r0085*(rnap!1)-b0014*()-i2032*(dna)-j01010*(rib~off)-j23100*().p:i2032(dna!1)  
+   16  s16    0.000e+00    r:j01010(rib~off)-e0040()  
+   17  s17    0.000e+00    r:j01010(rib~on)-e0040()  
+   18  s18    0.000e+00    p:e0040()  
+</species>
+<events>
+    1  pulse1   time>pulse1_start    arab=pulse_conc  
+    2  pulse2   time>pulse2_start    arab=pulse_conc  
+</events>
+<rules>
+  #  rtc2_counter
+    1    p:c0080(arab,dna)  +  nb:i0003(arac)    ->    nb:i0003(arac!1).p:c0080(arab!1,dna)      rule1_k*#1*#2    #  binding_AraC_Arabinose        
+    2    nb:i0003(arac!1).p:c0080(arab!1,dna)    ->    p:c0080(arab,dna)  +  nb:i0003(arac)      rule2_k*#1    #  binding_AraC_Arabinose_rev    
+    3    p:c0080(dim,dna)  +  p:c0080(dim,dna)    ->    p:c0080(dim!1,dna).p:c0080(dim!1,dna)      rule3_k*#1*#2    #  dimerization_AraC             
+    4    p:c0080(dim!1,dna).p:c0080(dim!1,dna)    ->    p:c0080(dim,dna)  +  p:c0080(dim,dna)      rule4_k*#1    #  dimerization_AraC_rev         
+    5    p:c0080(arab,dim!1,dna).p:c0080(arab,dim!1,dna)  +  d:X1-i0500(arac1,arac2)-X2    ->    d:X1-i0500(arac1!1,arac2!2)-X2.p:c0080(arab,dim!3,dna!1).p:c0080(arab,dim!3,dna!2)      rule5_k*#1*#2    #  binding_AraC2_pBAD            
+    6    d:X1-i0500(arac1!1,arac2!2)-X2.p:c0080(arab,dim!3,dna!1).p:c0080(arab,dim!3,dna!2)    ->    p:c0080(arab,dim!1,dna).p:c0080(arab,dim!1,dna)  +  d:X1-i0500(arac1,arac2)-X2      rule6_k*#1    #  binding_AraC2_pBAD_rev        
+    7    p:i2032(dna)  +  d:X1-r0085(rnap)-X2    ->    d:X1-r0085(rnap!1)-X2.p:i2032(dna!1)      rule7_k*#1*#2    #  binding_pT7_T7rnap            
+    8    d:X1-r0085(rnap!1)-X2.p:i2032(dna!1)    ->    p:i2032(dna)  +  d:X1-r0085(rnap)-X2      rule8_k*#1    #  binding_pT7_T7rnap_rev        
+    9    (d:X3*-b0014*()-X2*!<-r0085*(rnap!+)-X1*)    ->    r:X2      rule9_k*#1    #  transcription_pT7             
+   10    (d:X3*-b0014*()-X2*!<-i0500*(arac1,arac2)-X1*)    ->    r:X2      rule10_k*#1    #  transcription_pBAD            
+   11    (d:X3*-b0014*()-X2*!<-j23100*()-X1*)    ->    r:X2      rule11_k*#1    #  transcription_j23100          
+   12    (r:X1-j01010(rib~on)-X2!1-X3)    ->    p:X2      rule12_k*#1    #  translation_rbs_crR12         
+   13    r:X3-j01010(rib~off)-X4  +  (r:X1-j01008()-X2)    ->    r:X3-j01010(rib~on)-X4      rule13_kcat*#2*#1^rule13_n/(rule13_Kp+#1^rule13_n)    #  unlock_crR12_by_taR12         
+   14    r:X1-e0040()-X2    ->      rule14_k*#1    #  degradation_mRNA_gfp          
+   15    r:X1-i2032()-X2    ->      rule15_k*#1    #  degradation_mRNA_t7rnap       
+   16    r:j01008()    ->      rule16_k*#1    #  degradation_mRNA_j01008       
+   17    p:i2032()    ->      rule17_k*#1    #  degradation_t7_rnap           
+   18    p:e0040()    ->      rule18_k*#1    #  degradation_prot_gfp          
+   19    nb:i0003()    ->      rule19_k*#1    #  degradation_inducer_arabinose 
+</rules>
+<reactions>
+    1  r1        (s4)    ->    arab        N*transp2_pout*s4  
+    2  r2        arab    ->                N*transp2_pin*arab  
+    3  r3      (arab)    ->    s4          transp2_pin*arab  
+    4  r4          s4    ->                transp2_pout*s4  
+    5  r5      (dna1)    ->    s5          rule11_k*dna1    #11
+    6  r6        dna2    ->    s6  +  s7      2.000 * ( rule6_k*dna2 )    #6
+    7  r7          s4    ->                rule19_k*s4    #19
+    8  r8          s5    ->                rule15_k*s5    #15
+    9  r9      s6  +  s4    ->    s8          rule1_k*s6*s4  
+   10  r10     s6  +  s4    ->    s8          rule1_k*s6*s4  
+   11  r11         s6    ->    s9  +  s9      rule4_k*s6    #4
+   12  r12     s6  +  s7    ->    dna2        rule5_k*s6*s7    #5
+   13  r13       (s7)    ->    s10         rule10_k*s7    #10
+   14  r14     s8  +  s4    ->    s11         rule1_k*s8*s4  
+   15  r15         s8    ->    s4  +  s6      rule2_k*s8    #2
+   16  r16         s8    ->    s12  +  s9      rule4_k*s8    #4
+   17  r17         s8    ->    s6          rule19_k*s8    #19
+   18  r18     s9  +  s4    ->    s12         rule1_k*s9*s4  
+   19  r19     s9  +  s9    ->    s6          0.500 * ( rule3_k*s9*s9 )    #3
+   20  r20     s5  +  (s10)    ->    s13         rule13_kcat*s10*s5^rule13_n/(rule13_Kp+s5^rule13_n)    #13
+   21  r21        s10    ->                rule16_k*s10    #16
+   22  r22        s11    ->    s4  +  s8      2.000 * ( rule2_k*s11 )    #2
+   23  r23        s11    ->    s12  +  s12      rule4_k*s11    #4
+   24  r24        s11    ->    s8          2.000 * ( rule19_k*s11 )    #19
+   25  r25        s12    ->    s4  +  s9      rule2_k*s12    #2
+   26  r26     s9  +  s12    ->    s8          rule3_k*s9*s12    #3
+   27  r27     s12  +  s12    ->    s11         0.500 * ( rule3_k*s12*s12 )    #3
+   28  r28        s12    ->    s9          rule19_k*s12    #19
+   29  r29      (s13)    ->    s14         rule12_k*s13    #12
+   30  r30        s13    ->                rule15_k*s13    #15
+   31  r31     s14  +  dna1    ->    s15         rule7_k*s14*dna1    #7
+   32  r32        s14    ->                rule17_k*s14    #17
+   33  r33        s15    ->    dna1  +  s14      rule8_k*s15    #8
+   34  r34      (s15)    ->    s16         rule9_k*s15    #9
+   35  r35      (s15)    ->    s5          rule11_k*s15    #11
+   36  r36        s15    ->    dna1        rule17_k*s15    #17
+   37  r37     s16  +  (s10)    ->    s17         rule13_kcat*s10*s16^rule13_n/(rule13_Kp+s16^rule13_n)    #13
+   38  r38        s16    ->                rule14_k*s16    #14
+   39  r39      (s17)    ->    s18         rule12_k*s17    #12
+   40  r40        s17    ->                rule14_k*s17    #14
+   41  r41        s18    ->                rule18_k*s18    #18
+</reactions>

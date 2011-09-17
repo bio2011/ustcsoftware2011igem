@@ -1,0 +1,21 @@
+#!/bin/bash
+#This is a bash script used to import all tables into database 'MoDeL'
+
+#set your own hostname, username and password
+#export as environment variables
+
+#set database name
+DATABASE="MoDeL"
+
+#create database	
+mysql -u $USER -e "DROP DATABASE IF EXISTS $DATABASE;CREATE DATABASE $DATABASE";
+
+#set SQL file directory
+dir="./"
+
+#collect all .sql files
+for file in $(find $dir -name "*.sql" -type f)
+do
+	echo "import file: $file";
+	mysql $DATABASE < $file -u $USER
+done

@@ -1,0 +1,32 @@
+# Created by MoDeL 1.1
+<parameters>
+    1  xnot      4.000e+01  
+    2  ynot      4.000e+01  
+    3  rule1_k   4.000e-01  
+    4  rule2_k   2.000e-03  
+    5  rule3_k   1.000e-02  
+    6  rule4_k   3.000e-01  
+</parameters>
+<compartments>
+    1  comp0   (R)    1.000  1   #  predator_prey 
+</compartments>
+<species>
+  #  comp0
+    1  X   4.000e+01    nb:X()    #  Seed  
+    2  Y   4.000e+01    nb:Y()    #  Seed  
+</species>
+<events>
+</events>
+<rules>
+  #  predator_prey
+    1    nb:X()    ->    nb:X()  +  nb:X()      rule1_k*#1    #  prey_reproduces     
+    2    nb:Y()  +  nb:X()    ->    nb:X()  +  nb:Y()  +  nb:Y()      rule2_k*#1*#2    #  predator_reproduces 
+    3    nb:X()  +  nb:Y()    ->    nb:Y()      rule3_k*#1*#2    #  predator_eats_prey  
+    4    nb:Y()    ->      rule4_k*#1    #  predator_dies       
+</rules>
+<reactions>
+    1  r1          X    ->    X  +  X      rule1_k*X  
+    2  r2     Y  +  X    ->    X  +  Y  +  Y      rule2_k*Y*X    #2
+    3  r3     X  +  Y    ->    Y           rule3_k*X*Y    #3
+    4  r4          Y    ->                rule4_k*Y    #4
+</reactions>

@@ -1,0 +1,24 @@
+#Simple EGFR model from BNGL
+#Rewritten by Chen Liao, USTC	 
+
+<parameters>
+NA	6.02e23
+f	1
+Vo	f*1e-10
+V	f*3e-12
+EGF_init	20e-9*NA*Vo
+EGFR_init	f*1.8e5
+Grb2_init	f*1.5e5
+Sos1_init	f*6.2e4
+</parameters>
+
+<compartments>
+comp0	ROOT	egfr_simple	
+</compartments>
+
+<seedspecies>
+comp0	EGF		p:EGF(R)				EGF_init
+comp0	EGFR	p:EGFR(L,CR1,Y1068~U)	EGFR_init
+comp0	Grb2	p:Grb2(SH2,SH3)			Grb2_init
+comp0	Sos1	p:Sos1(PxxP)			Sos1_init
+</seedspecies>

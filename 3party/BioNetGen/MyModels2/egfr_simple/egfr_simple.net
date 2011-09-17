@@ -1,0 +1,187 @@
+# Created by BioNetGen 2.1.8+
+substanceUnits("Number");
+begin parameters
+    1 NA         6.02e23  # Constant
+    2 f          1  # Constant
+    3 Vo         1e-10  # ConstantExpression
+    4 V          3e-12  # ConstantExpression
+    5 EGF_init   1204000  # ConstantExpression
+    6 EGFR_init  180000  # ConstantExpression
+    7 Grb2_init  150000  # ConstantExpression
+    8 Sos1_init  62000  # ConstantExpression
+    9 kp1        1.49501661129568e-06  # ConstantExpression
+   10 km1        0.06  # Constant
+   11 kp2        5.53709856035438e-06  # ConstantExpression
+   12 km2        0.1  # Constant
+   13 kp3        0.5  # Constant
+   14 km3        4.505  # Constant
+   15 kp4        8.30564784053156e-07  # ConstantExpression
+   16 km4        0.05  # Constant
+   17 kp5        5.53709856035438e-06  # ConstantExpression
+   18 km5        0.06  # Constant
+   19 deg        0.01  # Constant
+end parameters
+begin molecule types
+    1 Trash()
+    2 EGF(R)
+    3 Grb2(SH2,SH3)
+    4 Sos1(PxxP)
+    5 EGFR(L,CR1,Y1068~U~P)
+end molecule types
+begin observables
+    1 Molecules EGFR_tot EGFR()
+    2 Molecules Lig_free EGF(R)
+    3 Species Dim {MatchOnce}EGFR(CR1!+)
+    4 Molecules RP EGFR(Y1068~P!?)
+    5 Molecules Grb2Sos1 Grb2(SH2,SH3!1).Sos1(PxxP!1)
+    6 Molecules Sos1_act EGFR(Y1068!1).Grb2(SH2!1,SH3!2).Sos1(PxxP!2)
+end observables
+begin species
+    1 EGF(R)                                                                                                                               EGF_init
+    2 EGFR(CR1,L,Y1068~U)                                                                                                                  EGFR_init
+    3 Grb2(SH2,SH3)                                                                                                                        Grb2_init
+    4 Sos1(PxxP)                                                                                                                           Sos1_init
+    5 EGF(R!1).EGFR(CR1,L!1,Y1068~U)                                                                                                       0
+    6 Grb2(SH2,SH3!1).Sos1(PxxP!1)                                                                                                         0
+    7 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~U).EGFR(CR1!3,L!2,Y1068~U)                                                                    0
+    8 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P).EGFR(CR1!3,L!2,Y1068~U)                                                                    0
+    9 Trash()                                                                                                                              0
+   10 EGF(R!1).EGFR(CR1,L!1,Y1068~P)                                                                                                       0
+   11 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P).EGFR(CR1!3,L!2,Y1068~P)                                                                    0
+   12 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P!4).EGFR(CR1!3,L!2,Y1068~U).Grb2(SH2!4,SH3)                                                  0
+   13 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P!4).EGFR(CR1!3,L!2,Y1068~U).Grb2(SH2!4,SH3!5).Sos1(PxxP!5)                                   0
+   14 EGFR(CR1,L,Y1068~P)                                                                                                                  0
+   15 EGF(R!1).EGFR(CR1,L!1,Y1068~P!2).Grb2(SH2!2,SH3)                                                                                     0
+   16 EGF(R!1).EGFR(CR1,L!1,Y1068~P!2).Grb2(SH2!2,SH3!3).Sos1(PxxP!3)                                                                      0
+   17 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P!4).EGFR(CR1!3,L!2,Y1068~P).Grb2(SH2!4,SH3)                                                  0
+   18 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P!4).EGFR(CR1!3,L!2,Y1068~P).Grb2(SH2!4,SH3!5).Sos1(PxxP!5)                                   0
+   19 EGFR(CR1,L,Y1068~P!1).Grb2(SH2!1,SH3)                                                                                                0
+   20 EGFR(CR1,L,Y1068~P!1).Grb2(SH2!1,SH3!2).Sos1(PxxP!2)                                                                                 0
+   21 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P!4).EGFR(CR1!3,L!2,Y1068~P!5).Grb2(SH2!4,SH3).Grb2(SH2!5,SH3)                                0
+   22 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P!4).EGFR(CR1!3,L!2,Y1068~P!5).Grb2(SH2!5,SH3!6).Grb2(SH2!4,SH3).Sos1(PxxP!6)                 0
+   23 EGF(R!1).EGF(R!2).EGFR(CR1!3,L!1,Y1068~P!4).EGFR(CR1!3,L!2,Y1068~P!5).Grb2(SH2!4,SH3!6).Grb2(SH2!5,SH3!7).Sos1(PxxP!6).Sos1(PxxP!7)  0
+end species
+begin reaction rules
+        1 EGFR(L,CR1) + EGF(R) <-> EGFR(L!1,CR1).EGF(R!1)  kp1, km1
+    # Bind(0.0.0,0.1.0)
+    # Reverse
+    # Unbind(0.0.0,0.1.0)
+        2 EGFR(L!+,CR1) + EGFR(L!+,CR1) <-> EGFR(L!+,CR1!1).EGFR(L!+,CR1!1)  kp2, km2
+    # Bind(0.0.1,0.1.1)
+    # Reverse
+    # Unbind(0.0.1,0.1.1)
+        3 EGFR(CR1!+,Y1068~U) -> EGFR(CR1!+,Y1068~P)  kp3
+    # StateChange(0.0.1,U->P)
+        4 EGFR(Y1068~P) -> EGFR(Y1068~U)  km3
+    # StateChange(0.0.0,P->U)
+        5 EGFR(Y1068~P) + Grb2(SH2) <-> EGFR(Y1068~P!1).Grb2(SH2!1)  kp4, km4
+    # Bind(0.0.0,0.1.0)
+    # Reverse
+    # Unbind(0.0.0,0.1.0)
+        6 Grb2(SH3) + Sos1(PxxP) <-> Grb2(SH3!1).Sos1(PxxP!1)  kp5, km5
+    # Bind(0.0.0,0.1.0)
+    # Reverse
+    # Unbind(0.0.0,0.1.0)
+        7 EGF(R!1).EGF(R!2).EGFR(L!1,CR1!3).EGFR(L!2,CR1!3) -> Trash()  deg DeleteMolecules
+    # Add Species Trash()
+    # Delete Molecule EGF(R!1)
+    # Delete Molecule EGF(R!2)
+    # Delete Molecule EGFR(L!1,CR1!3)
+    # Delete Molecule EGFR(L!2,CR1!3)
+end reaction rules
+begin reactions
+    1 1,2 5 kp1 #1
+    2 3,4 6 kp5 #6
+    3 5 1,2 km1 #1(reverse)
+    4 5,5 7 0.5*kp2 #2
+    5 6 3,4 km5 #6(reverse)
+    6 7 5,5 km2 #2(reverse)
+    7 7 8 2*kp3 #3
+    8 7 9 deg #7
+    9 8 5,10 km2 #2(reverse)
+   10 8 11 kp3 #3
+   11 8 7 km3 #4
+   12 3,8 12 kp4 #5
+   13 6,8 13 kp4 #5
+   14 8 9 deg #7
+   15 10 1,14 km1 #1(reverse)
+   16 5,10 8 kp2 #2
+   17 10,10 11 0.5*kp2 #2
+   18 11 10,10 km2 #2(reverse)
+   19 12 5,15 km2 #2(reverse)
+   20 13 5,16 km2 #2(reverse)
+   21 12 17 kp3 #3
+   22 13 18 kp3 #3
+   23 10 5 km3 #4
+   24 11 8 2*km3 #4
+   25 3,10 15 kp4 #5
+   26 6,10 16 kp4 #5
+   27 3,11 17 2*kp4 #5
+   28 6,11 18 2*kp4 #5
+   29 12 3,8 km4 #5(reverse)
+   30 13 6,8 km4 #5(reverse)
+   31 4,12 13 kp5 #6
+   32 13 4,12 km5 #6(reverse)
+   33 11 9 deg #7
+   34 12 3,9 deg #7
+   35 13 6,9 deg #7
+   36 1,14 10 kp1 #1
+   37 15 1,19 km1 #1(reverse)
+   38 16 1,20 km1 #1(reverse)
+   39 5,15 12 kp2 #2
+   40 5,16 13 kp2 #2
+   41 10,15 17 kp2 #2
+   42 10,16 18 kp2 #2
+   43 15,15 21 0.5*kp2 #2
+   44 15,16 22 kp2 #2
+   45 16,16 23 0.5*kp2 #2
+   46 17 10,15 km2 #2(reverse)
+   47 18 10,16 km2 #2(reverse)
+   48 14 2 km3 #4
+   49 17 12 km3 #4
+   50 18 13 km3 #4
+   51 3,14 19 kp4 #5
+   52 6,14 20 kp4 #5
+   53 3,17 21 kp4 #5
+   54 6,17 22 kp4 #5
+   55 3,18 22 kp4 #5
+   56 6,18 23 kp4 #5
+   57 15 3,10 km4 #5(reverse)
+   58 16 6,10 km4 #5(reverse)
+   59 17 3,11 km4 #5(reverse)
+   60 18 6,11 km4 #5(reverse)
+   61 4,15 16 kp5 #6
+   62 4,17 18 kp5 #6
+   63 16 4,15 km5 #6(reverse)
+   64 18 4,17 km5 #6(reverse)
+   65 17 3,9 deg #7
+   66 18 6,9 deg #7
+   67 1,19 15 kp1 #1
+   68 1,20 16 kp1 #1
+   69 21 15,15 km2 #2(reverse)
+   70 22 15,16 km2 #2(reverse)
+   71 23 16,16 km2 #2(reverse)
+   72 19 3,14 km4 #5(reverse)
+   73 20 6,14 km4 #5(reverse)
+   74 21 3,17 2*km4 #5(reverse)
+   75 22 3,18 km4 #5(reverse)
+   76 22 6,17 km4 #5(reverse)
+   77 23 6,18 2*km4 #5(reverse)
+   78 4,19 20 kp5 #6
+   79 4,21 22 2*kp5 #6
+   80 4,22 23 kp5 #6
+   81 20 4,19 km5 #6(reverse)
+   82 22 4,21 km5 #6(reverse)
+   83 23 4,22 2*km5 #6(reverse)
+   84 21 3,3,9 deg #7
+   85 22 3,6,9 deg #7
+   86 23 6,6,9 deg #7
+end reactions
+begin groups
+    1 EGFR_tot             2,5,2*7,2*8,10,2*11,2*12,2*13,14,15,16,2*17,2*18,19,20,2*21,2*22,2*23
+    2 Lig_free             1
+    3 Dim                  7,8,11,12,13,17,18,21,22,23
+    4 RP                   8,10,2*11,12,13,14,15,16,2*17,2*18,19,20,2*21,2*22,2*23
+    5 Grb2Sos1             6
+    6 Sos1_act             13,16,18,20,22,2*23
+end groups

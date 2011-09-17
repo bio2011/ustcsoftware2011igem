@@ -1,0 +1,39 @@
+# Created by BioNetGen 2.1.8+
+substanceUnits("Number");
+begin parameters
+    1 NA        6.0e23  # Constant
+    2 f         0.01  # Constant
+    3 Vo        1e-12  # ConstantExpression
+    4 V         3e-14  # ConstantExpression
+    5 EGF_conc  2e-9  # Constant
+    6 EGF0      1200  # ConstantExpression
+    7 EGFR0     1800  # ConstantExpression
+    8 kp1       0.00015  # ConstantExpression
+    9 km1       0.06  # Constant
+end parameters
+begin molecule types
+    1 EGF(R)
+    2 EGFR(L,CR1,Y1068~U~P)
+end molecule types
+begin observables
+    1 Molecules Lbound EGF(R!+)
+end observables
+begin species
+    1 EGF(R)                          EGF0
+    2 EGFR(CR1,L,Y1068~U)             EGFR0
+    3 EGF(R!1).EGFR(CR1,L!1,Y1068~U)  0
+end species
+begin reaction rules
+    Rule1: \
+EGF(R) + EGFR(L) <-> EGF(R!1).EGFR(L!1)  kp1, km1
+    # Bind(0.0.0,0.1.0)
+    # Reverse
+    # Unbind(0.0.0,0.1.0)
+end reaction rules
+begin reactions
+    1 1,2 3 kp1 #Rule1
+    2 3 1,2 km1 #Rule1r
+end reactions
+begin groups
+    1 Lbound               3
+end groups
