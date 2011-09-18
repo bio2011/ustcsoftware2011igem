@@ -1,0 +1,55 @@
+MoDeL v1.1
+
+===========================================================================
+Introduction
+
+We are aimed to developing a novel approach to enable fully automatic
+modeling process for synthetic biological systems. The notion of
+reaction rules are borrowed from Kappa and BNGL language and we apply
+it to face the new challenges brought by the role of DNA and RNA 
+sequences in the regulatory relationships in biological networks. With
+the help of database techniques, users are only required to submit
+the assembly of BioBrick parts (the design) and then a computational
+model is generated automatically by our program. This is quite helpful
+for the new comers of the syn-bio community to understand how individual
+BioBricks affect the whole behaviors of system dynamics. Obviously, not
+all people are familiar with modeling stuff and it should be time-consuming
+and error-prone, if done manually, even for professional.
+
+===========================================================================
+What's new?
+
+It is an extended project based on the work of 2010 USTCSoftware iGEM
+team. The codes have been rewritten using perl with large amounts of
+modifications in the characterization of rule-based languages we used,
+namely, MoDeL (Standard BioBrick Part Modeling Database Langugae). In
+addtion, relational database MySQL is used to replace XML-native DBXML
+develped by Oracle. Such efforts have significantly improved the quality
+of our program in both time and memory performance. The previous Cpp
+version can be found at http://ustc-igame.sf.net.
+
+===========================================================================
+Installation
+
+Please see INSTALL for installation instructions. 
+
+===========================================================================
+Citation
+
+For anyone who uses MoDeL or publishes papers about your software,
+we ask that you please cite the MoDeL paper:
+
+				The paper will be out soon.
+
+===========================================================================
+License
+
+MoDeL is an open-source software and everyone is permitted to
+distribute it and/or modify it under the terms of the GNU Lesser General
+Public License as published by the Free Software Foundation; 
+either version 2.1 of the License, or any later version.
+
+===========================================================================
+Acknowledgement
+
+All iGEM 2010 USTCSoftware team members and instructors. 

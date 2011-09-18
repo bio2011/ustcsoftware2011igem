@@ -40,5 +40,7 @@ synthetic biological systems as genetic regulatory networks. The input file
 in each directory has a suffix ".model" and simply input "../../src/MoDeL.pl input_file"
 to run the example in the command line.
 
+----------------------------------------------------------------------------
 Please report bugs, other problems or suggestions to liaochen1988@gmail.com.
+----------------------------------------------------------------------------
 
