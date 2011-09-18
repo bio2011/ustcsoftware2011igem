@@ -12,7 +12,7 @@ use Utils;
 use Expression;
 
 {
-	my $print_on=1;	#	switch on/off print
+	my $print_on=0;	#	switch on/off print
 
 	struct SpeciesList =>
 	{
