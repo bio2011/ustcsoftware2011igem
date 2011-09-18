@@ -8,7 +8,7 @@ A. The required perl packages
 
 1. Install LibSBML. Please refer to http://sbml.org/Software/libSBML/docs/java-api/libsbml-installation.html
 	to install perl bindings of LibSBML.
-2. Install perl modules Parse::BooleanLogic and Math::Expression::Evaluator. Just unpack the
+2. Install perl modules Regexp::Common, Parse::BooleanLogic and Math::Expression::Evaluator. Just unpack the
 	source file first and type (1) perl Makefile.PL (2) make (3) sudo make install in
 	the command line.
 3. Install perl MySQL driver. Please follow the instructions: 
