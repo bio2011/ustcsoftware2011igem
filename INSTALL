@@ -1,0 +1,44 @@
+C. Liao, Sept. 2011.
+
+                       INSTALLATION of MoDeL 1.1
+
+--------------------------------------------------------------------------
+A. The required perl packages
+--------------------------------------------------------------------------
+
+1. Install LibSBML. Please refer to http://sbml.org/Software/libSBML/docs/java-api/libsbml-installation.html
+	to install perl bindings of LibSBML.
+2. Install perl modules Parse::BooleanLogic and Math::Expression::Evaluator. Just unpack the
+	source file first and type (1) perl Makefile.PL (2) make (3) sudo make install in
+	the command line.
+3. Install perl MySQL driver. Please follow the instructions: 
+		shell> perl -MCPAN -e shell
+		cpan>  install DBI
+		cpan>  install DBD::mysql (try "force install DBD::mysql" to ignore some errors)
+
+Notes:
+1. All source files are included in the directory "requiredperlpackages".
+2. It is highly recommended that all packages are installed to the standard installation path.
+
+------------------------------------------------------------------------------
+B. The perl connection with MySQL database
+------------------------------------------------------------------------------
+
+1. Download and Install MySQL (https://help.ubuntu.com/8.04/serverguide/C/mysql.html).
+2. Set up environment variables MYSQL_HOST, USER and MYSQL_PWD.
+3. A tutorial database is contained in the directory "mysql" by encoding tables with
+	MySQL scripts. Just input ./importdata to construct a database named MoDeL from those
+	scripts. 
+
+--------------------------------------------------------------------------
+C. Running examples
+--------------------------------------------------------------------------
+
+Examples in the directory "expample" include two BioNetGen models (more such
+models can be found at http://bionetgen.org/index.php/Model_Examples) and two
+synthetic biological systems as genetic regulatory networks. The input file 
+in each directory has a suffix ".model" and simply input "../../src/MoDeL.pl input_file"
+to run the example in the command line.
+
+Please report bugs, other problems or suggestions to liaochen1988@gmail.com.
+
