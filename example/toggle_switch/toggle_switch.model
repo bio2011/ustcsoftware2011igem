@@ -1,8 +1,5 @@
-#input file Authored by Chen Liao, USTC
-#
-
-#	parameter
-#	Format:	[name][expression]
+#Rule-based model for Genetic Toggle Switch in E.coli by T.S.Gardner
+#Constructed by Chen Liao, USTC
 
 <parameters>
 NA				6.02e23		#	Avogadro
@@ -17,31 +14,16 @@ pulse1_start	10000		#	sec
 pulse1_conc		1e-4		#	M
 </parameters>
 
-#	compartment
-#	Format:	[name][outside][ruletable][volume][population]
-#	volumn and population are optional (default 1 to both)
-#	The outside compartment must be defined previously.
-
 <compartments>
 Medium		ROOT		medium			Ve
 Ecoli		Medium		toggle_switch	V	N
 </compartments>
 
-#	seedspecies
-#	Format:	[compartment][name][structure][init_concentration][const]
-#	const is optional with default value false
-#	Booleans: true/false, case insensitive.
-#
 <seedspecies>
 Medium	iptg	nb:i0001(laci)	iptg_init
 Ecoli	dna1	d:r0040(tetr1,tetr2)-b0034(rib)-c0012(dna,iptg,dim)-b0014()  dna1_init
 Ecoli	dna2	d:r0010(laci1,laci2)-b0034(rib)-c0040(dna,atc,dim)-b0014()	 dna2_init
 </seedspecies>
-
-#	event
-#	Format:	[name][trigger_condition][event_assignments...]
-#
-#	predefined time variable: time
 
 <events>
 pulse1	time>pulse1_start	iptg=pulse1_conc

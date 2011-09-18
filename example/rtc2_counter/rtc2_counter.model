@@ -1,8 +1,5 @@
-#input file Authored by Chen Liao, USTC
-#
-
-#	parameter
-#	Format:	[name][expression]
+#Rule-based model for Synthetic Gene Networks That Count by A.E.Friedland
+#Constructed by Chen Liao, USTC
 
 <parameters>
 NA				6.02e23	#	Avogadro
@@ -18,31 +15,16 @@ dna1_init		1/NA/V	#	M
 dna2_init		1/NA/V	#	M
 </parameters>
 
-#	compartment
-#	Format:	[name][outside][ruletable][volume][population]
-#	volumn and population are optional (default 1 to both)
-#	The outside compartment must be defined previously.
-
 <compartments>
 Medium		ROOT		medium			Ve
 Ecoli		Medium		rtc2_counter	V	N
 </compartments>
 
-#	seedspecies
-#	Format:	[compartment][name][structure][init_concentration][const]
-#	const is optional with default value false
-#	Booleans: true/false, case insensitive.
-#
 <seedspecies>
 Medium	arab	nb:i0003(arac)	arab_init
 Ecoli	dna1	d:j23100()-j01010(rib~off)-i2032(dna)-b0014()-r0085(rnap)-j01010(rib~off)-e0040()-b0014()	dna1_init
 Ecoli	dna2	p:c0080(dna!2,arab,dim!1).p:c0080(dna!3,arab,dim!1).d:i0500(arac1!2,arac2!3)-j01008()-b0014() dna2_init
 </seedspecies>
-
-#	event
-#	Format:	[name][trigger_condition][event_assignments...]
-#
-#	predefined time variable: time
 
 <events>
 pulse1	time>pulse1_start	arab=pulse_conc
