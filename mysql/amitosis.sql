@@ -54,29 +54,29 @@ INSERT INTO amitosis (name,reactant_patterns,product_patterns,is_reversible,forw
 #	------------------------------
 
 	#	activated pr promoter
-	('transcription_pr','@d:X1-pr(ci1,ci2)-X2!>-b0014()-X3','r:X2','False','mass_action_1(0.5,#1)',NULL),
+	('transcription_pr','@d:X1-pr(ci1,ci2)-X2!>-term()-X3','r:X2','False','mass_action_1(0.5,#1)',NULL),
 
 	#	leaky expression of pr promoter
-	('transcription_pr_leakness','@d:X1-pr(ci1!+,ci2!+)-X2!>-b0014()-X3','r:X2','False','mass_action_1(0.0005,#1)',NULL),
+	('transcription_pr_leakness','@d:X1-pr(ci1!+,ci2!+)-X2!>-term()-X3','r:X2','False','mass_action_1(0.0005,#1)',NULL),
 
 	#	activated prm promoter
-	('transcription_prm','@d:X1-prm(ci434_1,ci434_2)-X2!>-b0014()-X3','r:X2','False','mass_action_1(0.5,#1)',NULL),
+	('transcription_prm','@d:X1-prm(ci434_1,ci434_2)-X2!>-term()-X3','r:X2','False','mass_action_1(0.5,#1)',NULL),
 
 	#	leaky expression of prm promoter
-	('transcription_prm_leakness','@d:X1-prm(ci434_1!+,ci434_2!+)-X2!>-b0014()-X3','r:X2','False','mass_action_1(0.0005,#1)',NULL),
+	('transcription_prm_leakness','@d:X1-prm(ci434_1!+,ci434_2!+)-X2!>-term()-X3','r:X2','False','mass_action_1(0.0005,#1)',NULL),
 
 	#	activated plas promoter
-	('transcription_plas','@d:X1-plas(lasr1!+,lasr2!+)-X2!>-b0014()-X3','r:X2','False','mass_action_1(0.5,#1)',NULL),
+	('transcription_plas','@d:X1-plas(lasr1!+,lasr2!+)-X2!>-term()-X3','r:X2','False','mass_action_1(0.5,#1)',NULL),
 
 	#	leaky expression of plas promoter
-	('transcription_plas_leakness','@d:X1-plas(lasr1,lasr2)-X2!>-b0014()-X3','r:X2','False','mass_action_1(0.0005,#1)',NULL),
+	('transcription_plas_leakness','@d:X1-plas(lasr1,lasr2)-X2!>-term()-X3','r:X2','False','mass_action_1(0.0005,#1)',NULL),
 
 #	------------------------------
 #	Riboswitch
 #	------------------------------
 	
 	#	theophylline activating aptamer
-	('binding_theophylline_aptamer','nb:theo(apt);r:X1-aptamer(theo)-X2','nb:theo(apt!1).r:X1-aptamer(theo!1)-X2','True','mass_action_2(1e7,#1,#2)','mass_action_1(0.1,#1)'),
+	('unlock_theophylline_by_aptamer','@nb:theo();r:X1-aptamer(rib~off)-X2','r:X1-aptamer(rib~on)-X2','False','hill_kinetics(7.6,#2,1,9e-4,#1)',NULL),
 
 #	------------------------------
 #	synthesize AHL
@@ -93,7 +93,7 @@ INSERT INTO amitosis (name,reactant_patterns,product_patterns,is_reversible,forw
 	('translation_rbs','@r:X1-rbs()-X2!1-X3','p:X2','False','mass_action_1(0.01155,#1)',NULL),
 
 	#	aptamer
-	('translation_aptamer','@r:X1-aptamer(theo!+)-X2!1-X3','p:X2','False','mass_action_1(0.01155,#1)',NULL),
+	('translation_aptamer','@r:X1-aptamer(rib~on)-X2!1-X3','p:X2','False','mass_action_1(0.01155,#1)',NULL),
 
 #	------------------------------
 #	Degradation of RNAs

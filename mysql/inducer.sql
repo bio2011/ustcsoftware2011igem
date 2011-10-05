@@ -33,7 +33,7 @@ INSERT INTO inducer (species,rule_table_name_out,rule_table_name_in,transport_ra
 #	---------------
 #	Theophylline
 #	---------------
-	('nb:theo(apt)','medium','amitosis','0.1','0.1'),
+	('nb:theo()','medium','amitosis','0.1','0.1'),
 
 #	---------------
 #	AHL

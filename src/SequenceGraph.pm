@@ -231,6 +231,7 @@ use Utils;
 		my $ptrErr=1;
 		my @ptrs=();
 		for (my $i=0; $i < $pattXnum; $i++) { push(@ptrs,0); }
+		#print Dumper \@ptrs;
 
 		my $regexp=$patt->genRegExp(\@ptrs);
 
@@ -242,7 +243,7 @@ use Utils;
 		while (1) {
 			#print "regexp=$regexp\n";
 			my @F = ($spec->String =~ /$regexp/);
-			if (@F) {	#	print Dumper \@F;
+			if (@F) {		#print Dumper \@F;
 				if ($pattXnum > 0) {
 					if ($patt->validateXpartMatchings(\@F,\@pattXind)) {
 						my $MR = MatchingRecord->new();
@@ -267,6 +268,7 @@ use Utils;
 
 				#	update pointers
 				$ptrs[-1] += length($F[-1]) +3; #3 is at least
+				#print Dumper \@ptrs;
 				$regexp=$patt->genRegExp(\@ptrs);
 				$ptrErr=1;
 				$initMismatch++;
@@ -276,7 +278,13 @@ use Utils;
 				unless ($initMismatch++) { last; }	#	no matchings at all
 				if(++$ptrErr>$pattXnum) { last; }
 				for (my $i=1; $i < $ptrErr; $i++) { $ptrs[-$i] = 0; }
-				$ptrs[-$ptrErr] += length ($FF[-$ptrErr]) +3;
+				
+				#	---------------------------------------------
+				#	$ptrs[-$ptrErr] += length ($FF[-$ptrErr]) +3;
+				#	Chen Liao Modified On Oct.5
+					$ptrs[-$ptrErr] = length ($FF[-$ptrErr]) +3;
+				#	---------------------------------------------
+				
 				$regexp = $patt->genRegExp(\@ptrs);
 			}
 		}
@@ -338,7 +346,11 @@ use Utils;
 
 		#	special case
 		if ($numpart == 1 && $patt->Parts(0)->isXpart) { 
-			return $patt->Type.":(.*)"; 
+		#	=======================================
+		#	-----	Chen Liao Mofied On 10.5  -----
+		#	return $patt->Type.":(.*)"; 
+		#	=======================================
+			return $patt->Type.":(.{$$ptrsRef[-1],})"; 
 		}
 
 		#	create regular expression

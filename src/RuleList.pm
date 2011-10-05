@@ -325,7 +325,10 @@ use SpeciesGraph;
 			foreach my $rule (@$rulesRef) {
 				my $numRxns1=scalar(@{$rxnlist->Array});
 				#print "rule name = ",$rule->Name,"\n";
-				if (my $err=$rule->transformation($plist,$rxnlist,$flist,$slist,$spec)) { return $err; }
+				if (my $err=$rule->transformation($plist,$rxnlist,$flist,$slist,$spec)) { 
+					#print "err = $err\n";
+					return $err; 
+				}
 				my $numRxns2=scalar(@{$rxnlist->Array});
 				if ($numRxns2>$numRxns1) {
 					unless($rlist->RulesUsed->{$rule->Index}) {

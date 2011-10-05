@@ -20,9 +20,9 @@ Ecoli		Medium		amitosis	V	N
 </compartments>
 
 <seedspecies>
-Medium	theo	nb:theo(apt)	theo_init
+Medium	theo	nb:theo()	theo_init
 Ecoli	dna1	d:plas(lasr1,lasr2)-rbs()-ci(dna,dim)-term()	dna1_init
-Ecoli	dna2	d:term'()-gfp'()-rbs'()-ci434'(dna,dim)-rbs'()-pr'(ci1,ci2)-prm(ci434_1,ci434_2)-rbs()-ci(dna,dim)-rbs()-rfp()-rbs()-aptamer(theo)-chez()-rbs()-lasi()-rbs()-lasr(dim,ahl,dna)-term()	dna2_init
+Ecoli	dna2	d:term*()-gfp*()-rbs*()-ci434*(dna,dim)-rbs*()-pr*(ci1,ci2)-prm(ci434_1,ci434_2)-rbs()-ci(dna,dim)-rbs()-rfp()-aptamer(rib~off)-chez()-rbs()-lasi()-rbs()-lasr(dna,dim,ahl)-term()	dna2_init
 </seedspecies>
 
 <events>

@@ -50,7 +50,7 @@ use Utils;
 		my ($ipatt,$numCombs)=(-1,1);
 		my @allRes=();
 		foreach my $patt (@jointPatterns) {
-			$ipatt ++;
+			$ipatt ++;#print "$ipatt,\n";
 			my @partRes=();
 			for my $ispec (0..$index) {
 				my $spec=$slist->Array($ispec);
@@ -73,16 +73,14 @@ use Utils;
 			$numCombs *= scalar(@partRes);
 		}
 
-		#print "\nRule: number of combinations = $numCombs\n";
-=cut
-		for my $i (0..$#allRes) {
-			my $partres=$allRes[$i];
-			print "pattern $i, ", $jointPatterns[$i]->String,"\n";
-			foreach my $mr (@$partres) {
-				$mr->print();
-			}
-		}
-=cut
+		#	print "\nRule: number of combinations = $numCombs\n";
+		#	for my $i (0..$#allRes) {
+		#		my $partres=$allRes[$i];
+		#		print "pattern $i, ", $jointPatterns[$i]->String,"\n";
+		#		foreach my $mr (@$partres) {
+		#			$mr->print();
+		#		}
+		#	}
 
 		my $iptr=-1;
 		my @ptrs=();

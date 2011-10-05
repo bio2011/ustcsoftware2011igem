@@ -312,11 +312,12 @@ use Utils;
 		my $spec=shift;	#	species
 		my $specStanString=shift;
 		my $check=(@_)?shift:'';
+		#print "patt=",$patt->String,"\nspec=",$spec->String,"\n";
 
 		my $numCombs=1;
 		my (@allRes,@validRes)=((),());
 		foreach my $pattSeq (@{$patt->Sequences}) {
-			#print "\npattSeq=",$pattSeq->String,"\n";
+			#print "pattSeq=",$pattSeq->String,"\n";
 			my @seqRes=();
 			my $ispec=-1;
 			foreach my $specSeq (@{$spec->Sequences}) {
@@ -336,9 +337,10 @@ use Utils;
 			$numCombs *= scalar(@seqRes);
 			push (@allRes,\@seqRes);
 		}
+
+		#print "check = $check\n";
 		return $numCombs if $check eq 'check';
 
-		#print "patt=",$patt->String,"\nspec=",$spec->String,"\n";
 		#print "SpeciesGraph: number of combinations = $numCombs\n";
 
 		my ($iptr,@ptrs,@symm,%used)=(0,(),(),());
