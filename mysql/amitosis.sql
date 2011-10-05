@@ -135,4 +135,4 @@ INSERT INTO amitosis (name,reactant_patterns,product_patterns,is_reversible,forw
 	('degradation_theophylline','nb:theo()','','False','mass_action_1(0.35,#1)',NULL),
 
 	#	AHL
-	('degradation_ahl','nb:ahl()','','False','mass_action_1(0.35,#1)',NULL);
+	('degradation_ahl','nb:ahl(lasr)','','False','mass_action_1(0.35,#1)',NULL);

@@ -8,6 +8,7 @@ Ve				f*0.4		#	L
 V				f*7e-16		#	L
 N				1	
 theo_init		0.0
+ahl_init		0.0			#	
 dna1_init		1/NA/V		#	M	
 dna2_init		1/NA/V		#	M	
 pulse1_start	10000		#	sec
@@ -19,8 +20,14 @@ Medium		ROOT		medium		Ve
 Ecoli		Medium		amitosis	V	N
 </compartments>
 
+#	Note
+#	[1] AHL is synthesized by LasI rather than externally introduced! However, we need to write it explicitly to ensure the transportation reactions are correctly discovered!
+#	[2] Aptamer acts as the role of RBS and its state is determined by the value of its site rib, on or off. It can be switched by theophylline, nb:theo, in a manner of Hill kinetics.
+#	[3] LasR activates pLas in presence of AHL by forming a complex AHL2:LasR2.
+
 <seedspecies>
 Medium	theo	nb:theo()	theo_init
+Medium	ahl		nb:ahl(lasr)	ahl_init
 Ecoli	dna1	d:plas(lasr1,lasr2)-rbs()-ci(dna,dim)-term()	dna1_init
 Ecoli	dna2	d:term*()-gfp*()-rbs*()-ci434*(dna,dim)-rbs*()-pr*(ci1,ci2)-prm(ci434_1,ci434_2)-rbs()-ci(dna,dim)-rbs()-rfp()-aptamer(rib~off)-chez()-rbs()-lasi()-rbs()-lasr(dna,dim,ahl)-term()	dna2_init
 </seedspecies>
