@@ -28,4 +28,14 @@ INSERT INTO inducer (species,rule_table_name_out,rule_table_name_in,transport_ra
 #	---------------
 #	Arabinose
 #	---------------
-	('nb:i0003(arac)','medium','rtc2_counter','0.2','0.2');
+	('nb:i0003(arac)','medium','rtc2_counter','0.2','0.2'),
+
+#	---------------
+#	Theophylline
+#	---------------
+	('nb:theo(apt)','medium','amitosis','0.1','0.1'),
+
+#	---------------
+#	AHL
+#	---------------
+	('nb:ahl(lasr)','medium','amitosis','0.1','0.1');
